@@ -17,7 +17,7 @@ const authSlice = createSlice({
       state.status = false;
       state.userData = null;
     },
-  },
+  }, //can create postSlice for practice
 }); //user authentication check
 
 export const { login, logout } = authSlice.actions;

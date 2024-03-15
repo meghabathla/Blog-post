@@ -1,5 +1,5 @@
 import { ReducerType } from "@reduxjs/toolkit";
-import conf from "../conf.js";
+import conf from "../conf/conf.js";
 import { Client, ID, Databases, Storage, Query, Account } from "appwrite";
 
 export class Service {
@@ -115,6 +115,7 @@ export class Service {
   }
 
   getFilePreview(fileId) {
+    // sendig url of fileId
     return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
   }
 }

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Button, Input, Select, RTE } from "../index";
 import appwriteService from "../../appwrite/config";
 import { useNavigate } from "react-router-dom";
-import { UseSelector, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function PostForm({ post }) {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export default function PostForm({ post }) {
     });
   const userData = useSelector((state) => state.user.userData); // getting userdata from useSelector
   const submit = async (data) => {
-    //updating the post
+    //updating the post when user submit the data
     if (post) {
       const file = data.image[0]
         ? appwriteService.updateFile(data.image[0])
@@ -62,6 +62,7 @@ export default function PostForm({ post }) {
   }, []);
 
   useEffect(() => {
+    //disscuss
     const subscription = watch((value, { name }) => {
       if (name === "title") {
         setValue("slug", slugTransform(value.title), { shouldValidate: true });

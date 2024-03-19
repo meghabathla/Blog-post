@@ -11,12 +11,12 @@ export default function PostForm({ post }) {
     useForm({
       defaultValues: {
         title: post?.title || "",
-        slug: post?.slug || "",
-        content: post?.slug || "",
+        slug: post?.$id || "",
+        content: post?.content || "",
         status: post?.status || "active",
       },
     });
-  const userData = useSelector((state) => state.user.userData); // getting userdata from useSelector
+  const userData = useSelector((state) => state.auth.userData); // getting userdata from useSelector
   const submit = async (data) => {
     //updating the post when user submit the data
     if (post) {
@@ -56,7 +56,8 @@ export default function PostForm({ post }) {
       return value
         .trim()
         .toLowerCase()
-        .replace(/^[a-zA-Z\d]+/g, "-");
+        .replace(/[^a-zA-Z\d\s]+/g, "-")
+        .replace(/\s/g, "-");
     }
     return "";
   }, []);
@@ -72,7 +73,7 @@ export default function PostForm({ post }) {
     return () => {
       subscription.unsubscribe();
     };
-  }, [watch, setValue, slug]);
+  }, [watch, setValue, slugTransform]);
 
   return (
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">

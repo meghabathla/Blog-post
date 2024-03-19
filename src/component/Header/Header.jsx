@@ -58,11 +58,12 @@ function Header() {
                 </li>
               ) : null
             )}
-            authStatus && (
-            <li>
-              <LogoutBtn />
-            </li>
-            ){/* if authStatus exits then do whatever in () */}
+            {authStatus && (
+              <li>
+                <LogoutBtn />
+              </li>
+            )}
+            {/* if authStatus exits then do whatever in () */}
           </ul>
         </nav>
       </Container>

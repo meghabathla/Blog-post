@@ -9,7 +9,7 @@ import Footer from "./component/Footer/Footer";
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     authService

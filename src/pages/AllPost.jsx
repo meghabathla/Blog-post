@@ -4,6 +4,7 @@ import appwriteService from "../appwrite/config";
 
 function AllPost() {
   const [posts, setPosts] = useState([]);
+  console.log("posts: ", posts);
   useEffect(() => {
     appwriteService.getPosts([]).then((posts) => {
       if (posts) {
@@ -14,7 +15,7 @@ function AllPost() {
   return (
     <div className="w-full py-8">
       <Container>
-        <div className=" felx flex-wrap">
+        <div className=" flex flex-wrap">
           {posts.map((post) => (
             <div key={post.$id} className="p-2 w-1/4">
               <PostCard post={post} />

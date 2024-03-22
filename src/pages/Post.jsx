@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import appwriteService from "../appwrite/config";
 import { Button, Container } from "../component/index";
@@ -8,15 +8,22 @@ import { useSelector } from "react-redux";
 export default function Post() {
   const [post, setPost] = useState(null);
   const { slug } = useParams();
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
 
-  const isAuthor = post && userData ? post.userId === userData.$id : false;
+  const isAuthor = useMemo(() => {
+    if (post && userData) {
+      const _isAuthor = post.userId === userData.$id;
+      return _isAuthor;
+    }
+    return false;
+  }, [post, userData]);
 
   useEffect(() => {
     if (slug) {
       appwriteService.getPost(slug).then((post) => {
+        console.log(`post`, post);
         if (post) setPost(post);
         else navigate("/");
       });

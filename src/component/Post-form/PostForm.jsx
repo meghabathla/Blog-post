@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, Select, RTE } from "../index";
 import appwriteService from "../../appwrite/config";
@@ -17,6 +17,7 @@ export default function PostForm({ post }) {
       },
     });
   const userData = useSelector((state) => state.auth.userData); // getting userdata from useSelector
+  console.log(`in PostForm`, userData);
   const submit = async (data) => {
     //updating the post when user submit the data
     if (post) {
@@ -26,20 +27,21 @@ export default function PostForm({ post }) {
       if (file) {
         appwriteService.deleteFile(post.feautredImage);
       }
+
       const dbPost = await appwriteService.updatePost(post.$id, {
         ...data,
         featuredImage: file ? file.$id : undefined,
-
-        if(dbPost) {
-          navigate(`/post/${dbPost.$id}`);
-        },
       });
+      if (dbPost) {
+        navigate(`/post/${dbPost.$id}`);
+      }
     } else {
       const file = await appwriteService.uploadFile(data.image[0]); // check whether have file or not
 
       if (file) {
         const fileId = file.$id;
         data.featuredImage = fileId; //updating fileId in data featured image
+
         const dbPost = await appwriteService.createPost({
           ...data,
           userId: userData.$id,
@@ -51,16 +53,18 @@ export default function PostForm({ post }) {
     }
   };
 
-  const slugTransform = useCallback((value) => {
+  const slugTransform = (value) => {
     if (value && typeof value === "string") {
-      return value
-        .trim()
+      const editSlug = value
+        ?.trim()
         .toLowerCase()
         .replace(/[^a-zA-Z\d\s]+/g, "-")
         .replace(/\s/g, "-");
+      return editSlug;
+    } else {
+      alert(`Slug must be string`);
     }
-    return "";
-  }, []);
+  };
 
   useEffect(() => {
     //disscuss
@@ -68,7 +72,7 @@ export default function PostForm({ post }) {
       if (name === "title") {
         setValue("slug", slugTransform(value.title), { shouldValidate: true });
       }
-    }); // using watch on titlte an dslug setValue
+    }); // using watch on title an dslug setValue
 
     return () => {
       subscription.unsubscribe();

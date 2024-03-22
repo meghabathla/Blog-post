@@ -10,7 +10,13 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
+      // state <= object (Current state in store)
+      // action <= object/anything (when you call "dispatch for login", at that time you pass this action value)
+      console.log("action: ", action);
+
+      // Updating value of state.status = true;
       state.status = true;
+      // Updating value of state.userData =
       state.userData = action.payload.userData;
     },
     logout: (state) => {

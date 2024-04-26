@@ -16,11 +16,18 @@ function Home() {
     return (
       <div className="w-full py-8 mt-4 text-center">
         <Container>
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap w-full min-h-96">
             <div className="p-2 w-full">
-              <h1 className="text-2xl font-bold hover:text-gray-500">
+              <h1 className=" p-2  text-2xl font-bold hover:text-gray-500">
                 Login to read posts
               </h1>
+              <p className="p-4">
+                This blog site is where you can write or read blogs and
+                articles. For new bloggers seeking blog app free of charge to
+                kickstart their writing journey. Publish your passions your way.
+                Whether you'd like to share your knowledge, experiences or the
+                latest news, create a unique and beautiful blog.
+              </p>
             </div>
           </div>
         </Container>

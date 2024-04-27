@@ -1,3 +1,3 @@
 # Blog Post
 
-- [Click here to see it](https://blog-post-with-appwrite.vercel.app/)
+- [Click here to view Blog Post](https://blog-post-with-appwrite.vercel.app/)

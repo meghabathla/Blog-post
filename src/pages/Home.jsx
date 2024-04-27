@@ -20,9 +20,9 @@ function Home() {
             <p className="p-4">
               This blog site is where you can write or read blogs and articles.
               For new bloggers seeking blog app free of charge to kickstart
-              their writing journey. Publish your passions your way. Whether
-              you'd like to share your knowledge, experiences or the latest
-              news, create a unique and beautiful blog.
+              their writing journey. Whether you'd like to share your knowledge,
+              experiences or the latest news, create a unique and beautiful
+              blog. Publish your passions your way.
             </p>
           </div>
         </div>

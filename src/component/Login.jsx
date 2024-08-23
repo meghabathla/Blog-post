@@ -25,7 +25,7 @@ function Login() {
 
         navigate("/");
       }
-    } catch {
+    } catch (error) {
       setError(error.message);
     }
   };
